@@ -1,9 +1,7 @@
 const http = require('http');
+const data = require('./data.js')
 
-let users = [
-  {name:"Joe", age:30, city:"New York"},
-  {name:"Rick", age:48, city:"London"}
-]
+const db = new data()
 
 const port = 8080
 
@@ -15,7 +13,7 @@ async function handleGetRequest(req, res) {
     case '/':
       return res.end('Server is running...');
     case '/users':
-      data.push(users);
+      data.push(db.GetUsers());
       res.setHeader('Content-Type', 'application/json');
       return res.end(JSON.stringify(data));
     default:
@@ -25,7 +23,7 @@ async function handleGetRequest(req, res) {
 }
 
 const server = http.createServer((req, res) => {
-  
+
   if (req.method === 'GET') {
     handleGetRequest(req, res);
   }
