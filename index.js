@@ -1,9 +1,8 @@
 const http = require('http');
 const data = require('./data.js')
+const config = require('./config.json')
 
 const db = new data()
-
-const port = 8080
 
 async function handleGetRequest(req, res) {
   const { pathname } = new URL(req.url, `http://${req.headers.host}`);
@@ -30,6 +29,6 @@ const server = http.createServer((req, res) => {
 
 })
 
-server.listen(port, () => {
-  console.log('Listening on:\n Localhost: ' + 'http://localhost:' + port);
+server.listen(config.port, () => {
+  console.log('Listening on:\n Localhost: ' + config.protocol + '://' + config.host + ':' + config.port);
 })

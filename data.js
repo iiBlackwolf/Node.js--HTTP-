@@ -6,7 +6,10 @@ class data {
           ]
     }
 
-    AddUser(username, age, city) {
+    AddUser(username, age = 0, city = 'Unknown') {
+        if(!username) {
+            throw new Error("Username is required!");
+        }
         let userobj = {name: username, age:age, city:city}
 
         this.users.push(userobj);
